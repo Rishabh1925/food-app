@@ -39,7 +39,7 @@ except Exception as e:
     print(f"Error loading model: {e}")
     model = None
 
-def preprocess_image(image, target_size=(224, 224)):
+def preprocess_image(image, target_size=(92, 92)):
     """Preprocess image for model prediction"""
     if image.mode != 'RGB':
         image = image.convert('RGB')
