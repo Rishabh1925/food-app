@@ -7,6 +7,7 @@ from werkzeug.utils import secure_filename
 import io
 import base64
 import gdown
+import traceback
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
@@ -80,8 +81,6 @@ def predict_food(image):
             })
         
         return predicted_class, confidence, top_3_predictions
-    
-    import traceback  # Make sure this is at the top of your file!
 
     except Exception as e:
         print("Prediction error:")
