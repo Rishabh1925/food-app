@@ -6,10 +6,20 @@ import tensorflow as tf
 from werkzeug.utils import secure_filename
 import io
 import base64
+import gdown
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
+
+MODEL_PATH = "model.keras"
+GDRIVE_FILE_ID = "your_file_id_here"
+
+# Download model only if not already downloaded
+if not os.path.exists(MODEL_PATH):
+    print("Downloading model from Google Drive...")
+    gdown.download(f"https://drive.google.com/uc?id=1OsRuB1z0k9FoWj4rMS88DXIKMkAEsO1z", MODEL_PATH, quiet=False)
+
 
 # Ensure upload folder exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
@@ -22,7 +32,7 @@ FOOD_CLASSES = [
 
 # Load your model
 try:
-    model = tf.keras.models.load_model('model.h5')
+    model = tf.keras.models.load_model(MODEL_PATH)
     print("Model loaded successfully!")
 except Exception as e:
     print(f"Error loading model: {e}")
@@ -121,5 +131,5 @@ def health_check():
     return jsonify({'status': 'healthy', 'model_loaded': model is not None})
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.environ.get('PORT', 10000))
     app.run(host='0.0.0.0', port=port, debug=False)
