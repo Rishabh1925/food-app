@@ -13,3 +13,7 @@ venv/
 # Ignore LFS model if not tracked correctly
 *.h5
 *.ckpt
+
+# Ignore Python virtual environments
+venv/
+backend/venv/
