@@ -1,12 +1,15 @@
-.DS_Store
-# Ignore Python cache
+# Python
 __pycache__/
 *.py[cod]
-
-# Ignore notebook checkpoints
 *.ipynb_checkpoints/
 
-# Ignore model files handled by Git LFS
+# macOS system files
+.DS_Store
+
+# Virtual environments
+venv/
+.env/
+
+# Ignore LFS model if not tracked correctly
 *.h5
-*.keras
 *.ckpt
