@@ -62,16 +62,36 @@ function preprocessImage(imageElement) {
 
 // Simulate prediction (replace with actual model prediction)
 async function predictFood(imageElement) {
-    // Simulate loading time
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    // Simulate prediction results (replace with actual model prediction)
-    const randomIndex = Math.floor(Math.random() * foodCategories.length);
-    const confidence = Math.random() * 0.4 + 0.6; // Random confidence between 60-100%
-    
-    return {
-        predictedClass: foodCategories[randomIndex],
-        confidence: confidence
+    const result = {
+        predictedClass: null,
+        confidence: null
+    };
+
+    // Convert <img> to blob
+    const canvas = document.createElement('canvas');
+    canvas.width = 224;
+    canvas.height = 224;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(imageElement, 0, 0, 224, 224);
+
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg'));
+
+    const formData = new FormData();
+    formData.append('file', blob, 'upload.jpg');
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/predict', {
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await response.json();
+        result.predictedClass = data.class;
+        result.confidence = data.confidence;
+        return result;
+    } catch (error) {
+        console.error('Prediction request failed:', error);
+        throw error;
     };
     
     /* 

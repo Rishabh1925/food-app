@@ -1,54 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Image Classifier</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tensorflow/4.10.0/tf.min.js"></script>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🍽️ Food Predictor</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Food Image Classifier</h1>
-        <p class="subtitle">Upload an image to classify your food using deep learning!</p>
-        
-        <div class="upload-area" onclick="document.getElementById('fileInput').click()">
-            <div class="upload-icon">📷</div>
-            <div class="upload-text">Click to upload or drag and drop</div>
-            <div class="upload-subtext">Supports JPG, PNG, GIF files</div>
-            <input type="file" id="fileInput" accept="image/*">
-        </div>
-        
-        <img id="imagePreview" class="image-preview" alt="Preview">
-        
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <div>Analyzing your food image...</div>
-        </div>
-        
-        <div class="error-message" id="errorMessage"></div>
-        
-        <div class="result-container" id="resultContainer">
-            <div class="prediction-result" id="predictionResult"></div>
-            <div class="confidence-bar">
-                <div class="confidence-fill" id="confidenceFill">0%</div>
-            </div>
-        </div>
-        
-        <div class="food-categories">
-            <div class="category-item">🍰 Chocolate Cake</div>
-            <div class="category-item">🍩 Donuts</div>
-            <div class="category-item">🍟 French Fries</div>
-            <div class="category-item">🥪 Grilled Cheese</div>
-            <div class="category-item">🌮 Tacos</div>
-            <div class="category-item">🍦 Ice Cream</div>
-            <div class="category-item">🥞 Pancakes</div>
-            <div class="category-item">🍕 Pizza</div>
-            <div class="category-item">🥟 Samosa</div>
-            <div class="category-item">🍣 Sushi</div>
-        </div>
+  <div class="container">
+    <h1>🍕 Food Image Classifier</h1>
+
+    <div class="upload-area" id="uploadArea">
+      <input type="file" id="fileInput" accept="image/*" />
+      <p>Drag & drop a food image or click to select</p>
     </div>
 
-    <script src="script.js"></script>
+    <img id="imagePreview" class="image-preview" alt="Preview" style="display: none;" />
+
+    <div id="loading" class="loading" style="display: none;">🔄 Analyzing image...</div>
+    <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+    <div id="resultContainer" style="display: none;">
+      <div id="predictionResult"></div>
+
+      <div id="confidenceBar" class="confidence-bar">
+        <div id="confidenceFill" class="confidence-fill">0%</div>
+      </div>
+
+      <div id="categoryList">
+        <div class="category-item">🍰 Chocolate Cake</div>
+        <div class="category-item">🍩 Donuts</div>
+        <div class="category-item">🍟 French Fries</div>
+        <div class="category-item">🥪 Grilled Cheese Sandwich</div>
+        <div class="category-item">🌮 Tacos</div>
+        <div class="category-item">🍦 Ice Cream</div>
+        <div class="category-item">🥞 Pancakes</div>
+        <div class="category-item">🍕 Pizza</div>
+        <div class="category-item">🥟 Samosa</div>
+        <div class="category-item">🍣 Sushi</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
