@@ -55,11 +55,13 @@ def preprocess_image(image, target_size=(224, 224)):
 def predict_food(image):
     """Make prediction on uploaded image"""
     if model is None:
-        return None, None
+        return None, None, None
     
     try:
         # Preprocess image
         processed_image = preprocess_image(image)
+
+        print(f"Image shape before prediction: {processed_image.shape}")
         
         # Make prediction
         predictions = model.predict(processed_image)
@@ -79,8 +81,11 @@ def predict_food(image):
         
         return predicted_class, confidence, top_3_predictions
     
+    import traceback  # Make sure this is at the top of your file!
+
     except Exception as e:
-        print(f"Prediction error: {e}")
+        print("Prediction error:")
+        traceback.print_exc()
         return None, None, None
 
 @app.route('/')
