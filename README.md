@@ -1,113 +1,185 @@
-# 🍕 Food Image Classifier
+# Improved Scene Localization System
 
-A web-based AI application that classifies food images using deep learning. Built with TensorFlow and deployed as a client-side web app.
+A powerful computer vision tool that uses CLIP (Contrastive Language-Image Pre-Training) to locate and identify objects or scenes in images based on natural language queries.
 
-## 🎯 What it does
+## Features
 
-Upload an image of food and get instant AI-powered classification! The model can identify these 10 food categories:
+- **Smart Query Expansion**: Automatically generates variations of your search query for better detection
+- **Adaptive Window Sizing**: Dynamically adjusts detection windows based on image dimensions
+- **Confidence-Based Detection**: Provides confidence scores and quality assessments for each detection
+- **Professional Visualization**: Creates high-quality result images with bounding boxes and crops
+- **Multiple Detection Support**: Finds up to 3 best matches per query
+- **Metadata Export**: Saves detailed information about each detection
 
-- 🍰 Chocolate Cake
-- 🍩 Donuts  
-- 🍟 French Fries
-- 🥪 Grilled Cheese Sandwich
-- 🍦 Ice Cream
-- 🥞 Pancakes
-- 🍕 Pizza
-- 🥟 Samosa
-- 🍣 Sushi
-- 🌮 Tacos
+## Requirements
 
-## 🚀 Live Demo
+### System Requirements
+- Python 3.7 or higher
+- CUDA-compatible GPU (optional but recommended for faster processing)
+- At least 4GB RAM
+- 2GB free disk space for model downloads
 
-**[Try it here!](https://yourusername.github.io/food-classifier)** *(Update with your actual GitHub Pages URL)*
-
-## 🛠️ How it works
-
-1. **Deep Learning Model**: Trained using TensorFlow/Keras on food image dataset
-2. **Web Conversion**: Model converted to TensorFlow.js for browser deployment
-3. **Real-time Classification**: Instant predictions directly in your browser
-4. **No Server Required**: Everything runs client-side using WebGL acceleration
-
-## 📁 Project Structure
-
+### Python Dependencies
 ```
-food-classifier/
-├── index.html              # Web interface
-├── styles.css              # Styling & animations  
-├── script.js               # AI integration & UI logic
-├── model/                  # TensorFlow.js model files
-│   ├── model.json         # Model architecture
-│   ├── model.weights.bin  # Model weights
-│   └── food_categories.json # Class labels
-├── food_classifier_model.keras # Original trained model
-└── README.md              # This file
+torch>=1.9.0
+torchvision>=0.10.0
+transformers>=4.21.0
+opencv-python>=4.5.0
+pillow>=8.0.0
+matplotlib>=3.3.0
+numpy>=1.19.0
+scipy>=1.7.0
 ```
 
-## 🔧 Local Development
+## Installation
 
-To run locally:
+### Step 1: Download File
+- Create a new folder on your computer and name it `SceneLocalization`
+- Download the `scene_localizer.py` file and place it inside the `SceneLocalization` folder
+
+### Step 2: Install Dependencies
+
+#### Option A: Create requirements.txt (Recommended)
+Inside the `SceneLocalization` folder, create a file named `requirements.txt` and add the following content to it:
+```
+torch>=1.9.0
+torchvision>=0.10.0
+transformers>=4.21.0
+opencv-python>=4.5.0
+pillow>=8.0.0
+matplotlib>=3.3.0
+numpy>=1.19.0
+scipy>=1.7.0
+```
+
+Then install with:
+```bash
+pip install -r requirements.txt
+```
+
+#### Option B: Using pip
+```bash
+pip install torch torchvision transformers opencv-python pillow matplotlib numpy scipy
+```
+
+#### Option C: Using conda
+```bash
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+pip install transformers opencv-python pillow matplotlib scipy
+```
+
+
+### Step 3: Verify Installation
+Test your installation by running:
+```bash
+python -c "import torch, transformers, cv2, PIL; print('All dependencies installed successfully!')"
+```
+
+## Usage
+
+### Basic Usage
+
+1. **Place your images** in the same directory as `scene_localizer.py`
+   - Supported formats: JPG, JPEG, PNG, BMP, TIFF, WebP, GIF
+
+2. **Command Line Usage**
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/food-classifier.git
-cd food-classifier
+# Navigate to the directory containing the script
+cd /path/to/scene_localizer
 
-# Start a local server (required for TensorFlow.js)
-python -m http.server 8000
-
-# Open in browser
-open http://localhost:8000
+# Run the script
+python scene_localizer.py
 ```
 
-## 🧠 Model Details
+3. **Follow the interactive prompts**:
+   - Select an image (if multiple are available)
+   - Enter search queries when prompted
+   - View results in the generated visualization
 
-- **Architecture**: Convolutional Neural Network (CNN)
-- **Input Size**: 224×224×3 (RGB images)
-- **Output**: 10 food categories with confidence scores
-- **Framework**: TensorFlow/Keras → TensorFlow.js
-- **Performance**: Optimized for real-time browser inference
+## Output Files
 
-## 📊 Features
+### Main Visualization (`improved_result.jpg`)
+- Shows the original image with bounding boxes around detected objects
+- Displays confidence scores and quality ratings
+- Includes cropped regions for detailed inspection
 
-- ✅ **Drag & Drop Upload**: Easy image upload interface
-- ✅ **Instant Results**: Real-time classification with confidence scores
-- ✅ **Mobile Friendly**: Responsive design works on all devices
-- ✅ **No Data Collection**: Everything processes locally in your browser
-- ✅ **Visual Feedback**: Progress indicators and result visualization
+### Individual Detections (`improved_detections/` folder)
+Each detection is saved as:
+- `detection_1_score_0.647_confidence_high.jpg` - Cropped image
+- `detection_1_score_0.647_confidence_high_metadata.txt` - Detailed information
 
-## 🎨 Technologies Used
+### Metadata File Contents
+```
+Query: person talking
+Matched Query: two people conversing
+Confidence Score: 0.6470
+Bounding Box: (234, 156, 456, 389)
+Window Size: (200, 200)
+Crop Size: 222x233 pixels
+```
 
-- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **AI/ML**: TensorFlow.js, WebGL acceleration
-- **Design**: CSS Grid, Flexbox, CSS animations
-- **Deployment**: GitHub Pages (static hosting)
+## Query Examples
 
-## 📈 Future Improvements
+### Good Query Examples
+- **Specific objects**: "red car", "brown dog", "person wearing hat"
+- **Actions**: "person walking", "dog running", "people talking"
+- **Scenes**: "street vendor", "market stall", "outdoor café"
+- **Relationships**: "two people conversing", "person with bicycle"
 
-- [ ] Add more food categories
-- [ ] Implement model confidence thresholding
-- [ ] Add nutritional information lookup
-- [ ] Support for batch image processing
-- [ ] Model performance analytics
+### Tips for Better Results
+1. **Be specific**: "red sports car" vs "car"
+2. **Use descriptive adjectives**: "elderly person", "large building"
+3. **Include context**: "person selling goods", "dog playing in park"
+4. **Try variations**: If one query doesn't work, try synonyms
 
-## 🤝 Contributing
+### Performance Optimization
 
-Feel free to:
-- Report bugs or issues
-- Suggest new features
-- Submit pull requests
-- Share your results!
+#### For Faster Processing
+1. **Use GPU**: Install CUDA-compatible PyTorch
+2. **Reduce image size**: Resize large images (>2000px) before processing
+3. **Use specific queries**: Avoid overly broad terms
 
-## 📄 License
+#### For Better Accuracy
+1. **High-quality images**: Use clear, well-lit images
+2. **Appropriate size**: Images should be at least 400x400 pixels
+3. **Visible objects**: Ensure target objects are clearly visible and not occluded
 
-This project is open source and available under the [MIT License](LICENSE).
+## Technical Details
 
-## 🙏 Acknowledgments
+### Model Information
+- **Base Model**: OpenAI CLIP-ViT-B/32
+- **Input Resolution**: 224x224 pixels (for CLIP processing)
+- **Feature Dimensions**: 512-dimensional embeddings
+- **Languages Supported**: English (primary), limited multilingual support
 
-- Food image dataset contributors
-- TensorFlow.js team for browser ML capabilities
-- GitHub Pages for free hosting
+### Detection Algorithm
+1. **Image Preprocessing**: Resize and normalize input images
+2. **Query Expansion**: Generate semantic variations of input queries
+3. **Sliding Window**: Apply adaptive window sizes across the image
+4. **Feature Extraction**: Extract CLIP embeddings for image regions and text queries
+5. **Similarity Computation**: Calculate cosine similarity between image and text features
+6. **Non-Maximum Suppression**: Remove overlapping detections
+7. **Confidence Filtering**: Keep only high-confidence results
 
----
+## License
 
-**Made with ❤️ and AI** | [GitHub](https://github.com/yourusername/food-classifier) | [Demo](https://yourusername.github.io/food-classifier)
+This project uses the following open-source components:
+- **CLIP Model**: MIT License (OpenAI)
+- **PyTorch**: BSD License
+- **Transformers**: Apache 2.0 License (Hugging Face)
+
+## Support
+
+For issues and questions:
+1. Check the troubleshooting section above
+2. Ensure all dependencies are properly installed
+3. Verify image files are in supported formats
+4. Check that images are clear and objects are visible
+
+## Version History
+
+- **v1.0**: Initial release with basic CLIP-based detection
+- **v2.0**: Added smart query expansion and adaptive windowing
+- **v2.1**: Improved visualization and metadata export
+- **v2.2**: Enhanced error handling and fallback detection
