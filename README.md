@@ -19,18 +19,6 @@ A powerful computer vision tool that uses CLIP (Contrastive Language-Image Pre-T
 - At least 4GB RAM
 - 2GB free disk space for model downloads
 
-### Python Dependencies
-```
-torch>=1.9.0
-torchvision>=0.10.0
-transformers>=4.21.0
-opencv-python>=4.5.0
-pillow>=8.0.0
-matplotlib>=3.3.0
-numpy>=1.19.0
-scipy>=1.7.0
-```
-
 ## Installation
 
 ### Step 1: Download File
