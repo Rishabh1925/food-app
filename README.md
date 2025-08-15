@@ -37,7 +37,13 @@ scipy>=1.7.0
 - Create a new folder on your computer and name it `SceneLocalization`
 - Download the `scene_localizer.py` file and place it inside the `SceneLocalization` folder
 
-### Step 2: Install Dependencies
+### Step 2: Navigate to Directory
+```bash
+# Navigate to the directory containing the script
+cd /path/to/scene_localizer
+```
+
+### Step 3: Install Dependencies
 
 #### Option A: Create requirements.txt (Recommended)
 Inside the `SceneLocalization` folder, create a file named `requirements.txt` and add the following content to it:
@@ -69,10 +75,53 @@ pip install transformers opencv-python pillow matplotlib scipy
 ```
 
 
-### Step 3: Verify Installation
+### Step 4: Verify Installation
 Test your installation by running:
 ```bash
 python -c "import torch, transformers, cv2, PIL; print('All dependencies installed successfully!')"
+```
+
+### Step 5: Create Virtual Environment
+
+**Windows:**
+```cmd
+# Create virtual environment
+python -m venv scene_env
+
+# Activate virtual environment
+scene_env\Scripts\activate
+```
+
+**macOS/Linux:**
+```bash
+# Create virtual environment
+python3 -m venv scene_env
+
+# Activate virtual environment
+source scene_env/bin/activate
+```
+
+## Project Structure
+
+```
+scene-localization-system/
+│
+├── scene_localizer.py          # Main application script
+├── README.md                   # This documentation file
+├── requirements.txt            # Python dependencies
+│            
+├── street_scene.jpg
+├── market_photo.png
+├── office_meeting.jpeg
+├── park_dogs.bmp
+│
+├── scene_env/                  # Virtual Environment Folder Created
+│
+└── improved_detections/        
+    ├── detection_1_score_0.647_confidence_high.jpg
+    ├── detection_1_score_0.647_confidence_high_metadata.txt
+    ├── detection_2_score_0.423_confidence_medium.jpg
+    └── detection_2_score_0.423_confidence_medium_metadata.txt
 ```
 
 ## Usage
@@ -85,9 +134,6 @@ python -c "import torch, transformers, cv2, PIL; print('All dependencies install
 2. **Command Line Usage**
 
 ```bash
-# Navigate to the directory containing the script
-cd /path/to/scene_localizer
-
 # Run the script
 python scene_localizer.py
 ```
